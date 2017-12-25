@@ -1,0 +1,12 @@
+a.out
+./a.out
+
+*.swp
+*.swo
+*.swn
+
+data-structure/*.swp
+
+data-structure/*.swn
+
+data-structure/*.swo
