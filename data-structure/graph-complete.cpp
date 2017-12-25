@@ -33,23 +33,26 @@ node * search( FILE * fp2, node *current, int val) {
 
 void insert(FILE *fp, FILE * fp2, node * head, node * current) {
 	int val, limit;
+	int start, end;
 	fscanf(fp, "%d %d", &val, &limit);
 	fprintf(fp2, "%d %d \n", val, limit);
 	if( val != -1 ) {
 		node * info = search(fp2, head, val);
 		if(info != NULL) {
 			current = info;
+			start = info->limit;
+			end = start + limit;
 		}else {
 			current->limit = limit;
 			current->data = val;
+			start = 0, end = limit;
+		}
 
-			for(int i=0; i<limit; i++) {
-				current->ref[i] = (node *) malloc( sizeof(node) );
-				insert(fp, fp2, head, current->ref[i]);
-				fprintf(fp2, " %d # %d -> %d \n", current->ref[i]->limit,limit, val );
-				if( current->ref[i]->limit == 0 ) 
-					current->ref[i] = NULL;
-			}
+		for(int i=start; i<end; i++) {
+			current->ref[i] = (node *) malloc( sizeof(node) );
+			insert(fp, fp2, head, current->ref[i]);
+			if( current->ref[i]->limit == 0 ) 
+				current->ref[i] = NULL;
 		}
 	}
 }
@@ -69,14 +72,6 @@ int main() {
 
 		fprintf(fp2, "\n\n #############  Show  ################## \n");
 		show(head, fp2);
-		/*					
-		searchVal = 24;
-		fprintf(fp2, "\n\n ############# Search ( %d ) ################### \n", searchVal);
-
-		current = search( fp2, head, searchVal);	
-	 	fprintf(fp2, "\n After Search \n");
-		show( current, fp2);
-		*/
 	}
 
 	return 0;
