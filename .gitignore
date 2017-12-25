@@ -4,9 +4,12 @@ a.out
 *.swp
 *.swo
 *.swn
+*.swm
 
-data-structure/*.swp
+**/*.swp
 
-data-structure/*.swn
+**/*.swn
 
-data-structure/*.swo
+**/*.swm
+
+**/*.swo
